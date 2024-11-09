@@ -170,20 +170,27 @@ async function initializeVariables() {
   const collection = await createVariableCollection('Design Tokens');
 
   // Colors
-  for (const [colorName, shades] of Object.entries(tokens.colors)) {
-    for (const [shade, value] of Object.entries(shades)) {
-      await createVariable(
-        collection,
-        `color/${colorName}/${shade}`,
-        'COLOR',
-        value,
-      );
+  for (const [colorName, colorGroup] of Object.entries(tokens.colors.primitive)) {
+    for (const [shade, value] of Object.entries(colorGroup as Record<string, { r: number; g: number; b: number }>)) {
+      const variableName = `color/${colorName}/${shade}`;
+      await createVariable(collection, variableName, 'COLOR', {
+        r: value.r,
+        g: value.g,
+        b: value.b
+      });
     }
   }
 
   // Spacing
   for (const [key, value] of Object.entries(tokens.spacing)) {
-    await createVariable(collection, `spacing/${key}`, 'FLOAT', value);
+    if (key !== 'negative' && typeof value === 'number') {
+      await createVariable(collection, `spacing/${key}`, 'FLOAT', value);
+    }
+  }
+
+  // Negative spacingを別途処理
+  for (const [key, value] of Object.entries(tokens.spacing.negative)) {
+    await createVariable(collection, `spacing/negative/${key}`, 'FLOAT', value);
   }
 
   // Typography
