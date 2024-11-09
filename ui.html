@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Inter, sans-serif;
+        padding: 20px;
+      }
+      button {
+        width: 100%;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #0d99ff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0d8aff;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="create">Create Local Variables</button>
+    <script>
+      document.getElementById('create').onclick = () => {
+        parent.postMessage({ pluginMessage: { type: 'init-variables' } }, '*');
+      };
+    </script>
+  </body>
+</html>
