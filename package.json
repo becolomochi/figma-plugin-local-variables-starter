@@ -1,0 +1,28 @@
+{
+  "name": "figma-plugin-local-variables-starter",
+  "version": "1.0.0",
+  "description": "figma-plugin-local-variables-starter",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "figma",
+    "figma-plugin",
+    "design-tokens",
+    "design-system",
+    "variables",
+    "local-variables",
+    "starter",
+    "boilerplate",
+    "design-tools"
+  ],
+  "author": "becolomochi",
+  "license": "MIT",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.100.2",
+    "typescript": "^5.6.3"
+  }
+}
