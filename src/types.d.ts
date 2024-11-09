@@ -1,10 +1,10 @@
-export interface Color {
+declare interface Color {
   r: number;
   g: number;
   b: number;
 }
 
-export interface ColorShades {
+declare interface ColorShades {
   1: Color;
   2: Color;
   3: Color;
@@ -19,7 +19,7 @@ export interface ColorShades {
   12: Color;
 }
 
-export interface PrimitiveColors {
+declare interface PrimitiveColors {
   blue: ColorShades;
   green: ColorShades;
   red: ColorShades;
@@ -27,11 +27,11 @@ export interface PrimitiveColors {
   orange: ColorShades;
 }
 
-export interface Colors {
+declare interface Colors {
   primitive: PrimitiveColors;
 }
 
-export interface Spacing {
+declare interface Spacing {
   none: number;
   px: number;
   '4xs': number;
@@ -60,7 +60,7 @@ export interface Spacing {
   };
 }
 
-export interface Typography {
+declare interface Typography {
   size: {
     xs: number;
     sm: number;
@@ -86,7 +86,7 @@ export interface Typography {
   };
 }
 
-export interface Radius {
+declare interface Radius {
   none: number;
   sm: number;
   base: number;
@@ -96,7 +96,7 @@ export interface Radius {
   full: number;
 }
 
-export interface DesignTokens {
+declare interface DesignTokens {
   colors: Colors;
   spacing: Spacing;
   typography: Typography;

@@ -1,5 +1,3 @@
-import { DesignTokens } from "./types";
-
 // Figma Plugin APIの初期化
 figma.showUI(__html__, { width: 320, height: 480 });
 
