@@ -5,6 +5,23 @@
       body {
         font-family: Inter, sans-serif;
         padding: 20px;
+        box-sizing: border-box;
+      }
+      .categories {
+        margin-bottom: 20px;
+      }
+      .category-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .category-item input[type="checkbox"] {
+        margin-right: 8px;
+        cursor: pointer;
+      }
+      .category-item label {
+        cursor: pointer;
+        font-size: 14px;
       }
       button {
         width: 100%;
@@ -19,14 +36,103 @@
       button:hover {
         background-color: #0d8aff;
       }
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      .input-field {
+        margin-bottom: 16px;
+      }
+      .input-field label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+      .input-field input {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      fieldset {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px;
+        margin: 0 0 16px 0;
+      }
+      
+      legend {
+        font-size: 14px;
+        padding: 0 4px;
+      }
     </style>
   </head>
   <body>
+    <div class="categories">
+      <div class="input-field">
+        <label for="collection-name">Collection Name:</label>
+        <input type="text" id="collection-name" value="Design Tokens">
+      </div>
+      <div class="input-field">
+        <label for="mode-name">Mode Name:</label>
+        <input type="text" id="mode-name" value="Default">
+      </div>
+      
+      <fieldset>
+        <legend>Token Categories</legend>
+        <div class="category-item">
+          <input type="checkbox" id="colors" checked>
+          <label for="colors">Colors</label>
+        </div>
+        <div class="category-item">
+          <input type="checkbox" id="spacing" checked>
+          <label for="spacing">Spacing</label>
+        </div>
+        <div class="category-item">
+          <input type="checkbox" id="typography" checked>
+          <label for="typography">Typography</label>
+        </div>
+        <div class="category-item">
+          <input type="checkbox" id="radius" checked>
+          <label for="radius">Radius</label>
+        </div>
+      </fieldset>
+    </div>
     <button id="create">Create Local Variables</button>
     <script>
-      document.getElementById('create').onclick = () => {
-        parent.postMessage({ pluginMessage: { type: 'init-variables' } }, '*');
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const createButton = document.getElementById('create');
+
+      function updateButtonState() {
+        const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+        createButton.disabled = !anyChecked;
+      }
+
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonState);
+      });
+
+      createButton.onclick = () => {
+        const selectedCategories = {
+          colors: document.getElementById('colors').checked,
+          spacing: document.getElementById('spacing').checked,
+          typography: document.getElementById('typography').checked,
+          radius: document.getElementById('radius').checked
+        };
+        
+        parent.postMessage({ 
+          pluginMessage: { 
+            type: 'init-variables',
+            categories: selectedCategories,
+            modeName: document.getElementById('mode-name').value,
+            collectionName: document.getElementById('collection-name').value
+          }
+        }, '*');
       };
+
+      // Set initial button state
+      updateButtonState();
     </script>
   </body>
 </html>

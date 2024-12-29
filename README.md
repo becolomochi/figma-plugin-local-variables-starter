@@ -8,6 +8,9 @@ A Figma plugin starter kit that helps you create local variables from predefined
 - 📏 Spacing system (including negative values)
 - 📝 Typography settings (size, weight, line height)
 - 🔄 Border radius presets
+- ✨ Customizable collection and mode names
+- 🔄 Resizable plugin window
+- ✅ Selective token category generation
 
 ## Installation
 
@@ -29,8 +32,12 @@ npm run build
 1. In Figma, go to Plugins > Development > Import plugin from manifest
 2. Select the `manifest.json` file from this project
 3. Run the plugin in Figma
-4. Click "Create Local Variables" button
-5. The plugin will create a new variable collection called "Design Tokens"
+4. Configure your settings:
+   - Enter a name for your variable collection
+   - Set your preferred mode name
+   - Select which token categories to generate
+5. Click "Create Local Variables" button
+6. The plugin will create a new variable collection with your specified settings
 
 ## Design Tokens Structure
 
